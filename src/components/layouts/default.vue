@@ -34,11 +34,11 @@ export default {
     @include Flex(row nowrap, flex-start, stretch);
     >.side-bar {
       background: #ddd;
-      padding: 10px 0;
+      padding: 5px 0;
     }
     > .content {
       flex: auto;
-      padding: 10px;
+      padding: 5px;
       background: #ddd;
       @include Flex(column nowrap, flex-start, stretch);
       > div {
