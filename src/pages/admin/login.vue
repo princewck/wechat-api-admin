@@ -5,21 +5,21 @@
   </div>
   <div class="text item">
     <el-form
-      :model="registerForm"
+      :model="loginForm"
       :rules="rules"
-      ref="ruleForm"
+      ref="loginForm"
       label-width="100px"
       class="demo-ruleForm"
       label-position="top"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="registerForm.name"></el-input>
+        <el-input v-model="loginForm.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="registerForm.password"></el-input>
+        <el-input v-model="loginForm.password"></el-input>
       </el-form-item>
       <el-form-item class="submit-opera">
-        <el-button type="primary" @click="submitForm('ruleForm2')">登陆</el-button>
+        <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
       </el-form-item>
       <p class="info-link"><router-link to="/user/register">没有账号？注册一个</router-link></p>
     </el-form>
@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'Register',
   data() {
     return {
-      registerForm: {
+      loginForm: {
         username: '',
         password: '',
         confirm: '',
@@ -49,11 +50,25 @@ export default {
         }
     };
   },
+  computed: {
+    ...mapState({
+      errors: state => state.user.login.errors,
+      token: state => state.user.token,
+    })
+  },
+  beforeMount() {
+    if (this.token) {
+      this.$router.push('/home');
+    }
+  },  
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$store.dispatch({
+            type: 'login',
+            data: this.loginForm,
+          })
         } else {
           console.log('error submit!!');
           return false;
@@ -63,6 +78,18 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
+  },
+  watch: {
+    errors(err) {
+      if (err) {
+        this.$message.error(err);
+      }
+    },
+    token(nV, oV) {
+      if (nV) {
+        this.$router.push('/home');
+      }
+    }    
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <authorized>
-    <Header/>
+    <Header :info="info"/>
     <div class="content-wrapper">
       <nav-menu class="side-bar"/>
       <div class="content">
@@ -13,13 +13,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Authorized from '../Authorized';
 import NavMenu from '../NavMenu';
 import Header from '../header';
 export default {
   components: { Authorized, NavMenu, Header },
-  beforeCreate() {
-  },
+  computed: {
+    ...mapState({
+      info: state => state.user.info,
+    })
+  }
 }
 </script>
 

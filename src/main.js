@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import Vuex from 'vuex';
+import storeOpt from './store';
 
 // 先全量引入
 Vue.use(ElementUI, {
@@ -12,11 +14,15 @@ Vue.use(ElementUI, {
   zIndex: 3000
 });
 Vue.config.productionTip = false
+Vue.use(Vuex);
+
+const store = new Vuex.Store(storeOpt);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store,
 })

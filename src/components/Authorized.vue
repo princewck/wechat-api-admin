@@ -6,20 +6,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  data() {
-    return {
-      authorized: false,
-    }
+  computed: {
+    ...mapState({
+      token: state => state.user.token,
+    }),
+    authorized() {
+      return !!this.token;
+    },
   },
   created() {
     console.log('ssss');
   },
-  mounted() {
-    setTimeout(() => {
-      console.log('set auth true');
-      this.authorized = true;
-    }, 1000);
+  beforeMount() {
+    if (!this.token) {
+      this.$router.push('/user/login');
+    }    
+  },
+  watch: {
+    token(val) {
+      if (!val) {
+        this.$router.push('/user/login');
+      }
+    }
   }
 }
 </script>
