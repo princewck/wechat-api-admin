@@ -25,6 +25,7 @@
         <el-button type="primary" @click="submitForm('ruleForm2')">注册</el-button>
         <el-button @click="resetForm('ruleForm2')">重置</el-button>
       </el-form-item>
+      <p class="info-link"><router-link to="/user/login">已有账号？直接登陆</router-link></p>
     </el-form>
   </div>
 </el-card>
@@ -74,6 +75,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/mixins.scss';
 .box-card {
   .title {
     font-weight: bold;
@@ -85,6 +87,11 @@ export default {
     text-align: center;
     border-top: 1px solid #f5f5f5;
     padding-top: 25px;
+  }
+  .info-link {
+    text-align: right;
+    font-size: 12px;
+    @include links();
   }
 }
 </style>

@@ -15,9 +15,9 @@
 
 @mixin links() {
   a {
-    color: #1890ff;
+    color: orangered;
     &:hover, &:active, &:visited, &:focus {
-      color: #1890ff;
+      color: orangered;
     }
   }
 }

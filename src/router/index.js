@@ -5,6 +5,7 @@ import FullLayout from '@/components/layouts/fullsize';
 
 import HelloWorld from '@/components/HelloWorld';
 import Register from '@/pages/admin/register';
+import Login from '@/pages/admin/login';
 
 
 Vue.use(Router)
@@ -12,13 +13,17 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/user',
       name: 'User',
       component: FullLayout,
       children: [
         {
-          path: '/register',
+          path: '/user/register',
           component: Register,
+        },
+        {
+          path: '/user/login',
+          component: Login,
         }
       ]
     },
