@@ -49,6 +49,8 @@ export default {
         background: #fff;
         height: 100%;
         overflow: auto;
+        padding: 15px 25px;
+        box-sizing: border-box;
       }
     }
   }

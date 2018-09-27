@@ -6,6 +6,7 @@ import FullLayout from '@/components/layouts/fullsize';
 import HelloWorld from '@/components/HelloWorld';
 import Register from '@/pages/admin/register';
 import Login from '@/pages/admin/login';
+import Customers from '@/pages/users';
 
 
 Vue.use(Router)
@@ -35,6 +36,10 @@ export default new Router({
         {
           path: '/home',
           component: HelloWorld,
+        },
+        {
+          path: '/users',
+          component: Customers,
         }
       ]
     }
