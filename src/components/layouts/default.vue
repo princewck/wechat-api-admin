@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="wrapper">
   <authorized>
     <Header :info="info"/>
     <div class="content-wrapper">
@@ -29,16 +29,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/mixins.scss';
+  .wrapper {
+    height: 100vh;
+    @include Flex(column nowrap);
+    > div {
+      flex: auto;
+      align-items: stretch;
+      @include Flex(column nowrap);
+    }
+  }
   .content-wrapper {
-    position: absolute;
-    top: 101px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100%;
+    flex: auto;
     @include Flex(row nowrap, flex-start, stretch);
     >.side-bar {
       background: #ddd;
-      padding: 5px 0;
+      padding-top: 1px;
     }
     > .content {
       flex: auto;

@@ -7,6 +7,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Vuex from 'vuex';
 import storeOpt from './store';
+import './styles/reset.scss';
 
 // 先全量引入
 Vue.use(ElementUI, {
