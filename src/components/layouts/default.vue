@@ -31,11 +31,11 @@ export default {
 @import '@/styles/mixins.scss';
   .wrapper {
     height: 100vh;
-    @include Flex(column nowrap);
+    @include Flex(column nowrap, center, stretch);
     > div {
       flex: auto;
       align-items: stretch;
-      @include Flex(column nowrap);
+      @include Flex(column nowrap, center, stretch);
     }
   }
   .content-wrapper {
@@ -47,9 +47,9 @@ export default {
       padding-top: 1px;
     }
     > .content {
-      flex: auto;
       padding: 5px;
       background: #ddd;
+      flex: auto;
       @include Flex(column nowrap, flex-start, stretch);
       > div {
         background: #fff;

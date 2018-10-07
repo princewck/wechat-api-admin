@@ -8,6 +8,9 @@ import Register from '@/pages/admin/register';
 import Login from '@/pages/admin/login';
 import Customers from '@/pages/users';
 
+import WishCategory from '@/pages/wish/WishCategory';
+import WishThread from '@/pages/wish/WishThread';
+
 
 Vue.use(Router)
 
@@ -40,6 +43,14 @@ export default new Router({
         {
           path: '/users',
           component: Customers,
+        },
+        {
+          path: '/wish/categroy',
+          component: WishCategory,
+        },
+        {
+          path: '/wish/thread',
+          component: WishThread,
         }
       ]
     }

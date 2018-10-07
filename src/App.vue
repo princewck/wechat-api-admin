@@ -12,11 +12,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scopped>
+<style lang="scss">
 body, html {
   height: 100%;
   margin: 0;
 }
+
+.el-select {
+  width: 100%;
+}
+
+.pull-right {
+  float: right;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

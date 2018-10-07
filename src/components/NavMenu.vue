@@ -5,7 +5,7 @@
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group> -->
 
-    <div @click="toggleCollapse"><i :class="isCollapse ? 'el-icon-arrow-right' : 'el-icon-arrow-left'"/></div>
+    <!-- <div @click="toggleCollapse"><i :class="isCollapse ? 'el-icon-arrow-right' : 'el-icon-arrow-left'"/></div> -->
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical-demo"
@@ -21,6 +21,14 @@
         <i class="el-icon-setting"></i>
         <span slot="title">用户列表</span>
       </el-menu-item>
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>祝福语小程序</span>
+        </template>
+        <el-menu-item index="/wish/categroy">分组管理</el-menu-item>        
+        <el-menu-item index="/wish/thread">文章管理</el-menu-item>
+      </el-submenu>
     </el-menu>
   </div>
 </template>

@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://push-test.chengkai.wang/admin/',
+        // target: 'http://push-test.chengkai.wang/admin/',
+        target: 'http://localhost:7001/admin/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/'
