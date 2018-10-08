@@ -11,8 +11,7 @@
         :data="list"
         stripe
         style="width: 100%"
-        :header-cell-style="{'text-align': 'center'}"
-      >
+      >      
         <el-table-column
           prop="avatar"
           label="头像">
@@ -61,7 +60,14 @@
           <template slot-scope="scope">
             {{ format(scope.row.last_login) }}
           </template>          
-        </el-table-column>        
+        </el-table-column>   
+        <el-table-column
+          prop="avatar"
+          label="备注">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.today"  type="success">今天登录过</el-tag>
+          </template>
+        </el-table-column>                
       </el-table>     
   </div>
 </template>
@@ -69,6 +75,11 @@
 <script>
 import { mapState } from "vuex";
 import moment from 'moment';
+
+function isToday(d) {
+  return moment(d).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD');
+}
+
 export default {
   name: "Users",
   data() {
@@ -76,7 +87,7 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.customers.list
+      list: state => state.customers.list.map(item => ({...item, today: isToday(item.last_login)}))
     })
   },
   created() {
