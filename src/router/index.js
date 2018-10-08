@@ -10,6 +10,7 @@ import Customers from '@/pages/users';
 
 import WishCategory from '@/pages/wish/WishCategory';
 import WishThread from '@/pages/wish/WishThread';
+import ThreadEdit from '@/pages/wish/edit';
 
 
 Vue.use(Router)
@@ -51,6 +52,10 @@ export default new Router({
         {
           path: '/wish/thread',
           component: WishThread,
+        },
+        {
+          path: '/wish/thread/:id/edit',
+          component: ThreadEdit,
         }
       ]
     }

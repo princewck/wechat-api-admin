@@ -6,6 +6,8 @@ import {
 
   fetchThreads,
   deleteThread,
+  createThread,
+  updateThread,
 } from '@/service/wish';
 
 export default {
@@ -63,6 +65,13 @@ export default {
     },
     async 'wish/deleteThread'({commit}, {id}) {
       await deleteThread(id);
+    },
+    async 'wish/publish'({commit}, thread) {
+      if (thread.id) {
+        await updateThread(thread.id, thread);
+      } else {
+        await createThread(thread);
+      }
     }
   }
 }

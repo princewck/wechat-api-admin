@@ -10,12 +10,15 @@
         :data="list"
         stripe
         style="width: 100%"
-        :header-cell-style="{'text-align': 'center'}"
       >
-      <el-table-column width="30px" prop="id" label="ID"/>
+      <el-table-column width="50px" prop="id" label="ID"/>
       <el-table-column prop="title" label="标题"/>
       <el-table-column prop="background" label="背景图片"/>
-      <el-table-column prop="cid" label="所属分类"/>
+      <el-table-column prop="cid" label="所属分类">
+        <template slot-scope="scope">
+          <el-tag>{{ getCate(scope.row) }}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="created_at" label="创建时间">
         <template slot-scope="scope">
           {{ format(scope.row.created_at) }}
@@ -27,8 +30,13 @@
         </template>
       </el-table-column>
       <el-table-column prop="description" label="描述"/>
-      <el-table-column prop="status" label="状态"/>
-      <el-table-column label="操作">
+      <el-table-column prop="status" label="状态">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.status == 1" type="success">可用</el-tag>
+          <el-tag v-if="scope.row.status == 0" type="warning">禁用</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column width="150px" label="操作">
         <template slot-scope="scope">
           <el-button type="primary" @click="update(scope.row)">修改</el-button>
           <el-button type="danger" @click="deleteThread(scope.row)">删除</el-button>
@@ -46,14 +54,19 @@ export default {
   computed: {
     ...mapState({
       list: state => state.wish.thread.list,
+      categories: state => state.wish.category.list.reduce((map, item) => {
+        map[item.id] = item;
+        return map;
+      }, {}),
     })
   },
   created() {
     this.$store.dispatch('wish/fetchThreads');
+    this.$store.dispatch('wish/fetchCategories');
   },
   methods: {
     update(row) {
-      this.$router.push({path: `/wish/category/${row.id}/edit`});
+      this.$router.push({path: `/wish/thread/${row.id}/edit`});
     },
     async deleteThread(row) {
       await this.$confirm('次操作将彻底删除这篇文章', '提示', {
@@ -74,6 +87,11 @@ export default {
     },
     format(m) {
       return moment(m).format('YYYY-MM-DD HH:mm:ss');
+    },
+    getCate(row) {
+      const _row = this.categories[row.cid];
+      console.log('_row', _row, this.categories, row);
+      return _row && _row.name;
     }
   },
 }

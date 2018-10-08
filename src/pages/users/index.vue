@@ -31,6 +31,10 @@
         <el-table-column
           prop="gender"
           label="性别">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.gender == 1" type="primary">♂男</el-tag>
+            <el-tag v-if="scope.row.gender == 2" type="warning">♀女</el-tag>
+          </template>
         </el-table-column>    
         <el-table-column
           prop="province"

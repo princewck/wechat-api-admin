@@ -39,9 +39,63 @@ export function fetchThreads() {
   });
 }
 
+export function findThread(id) {
+  return request({
+    url: `/api/wish/threads/${id}`,
+  });
+}
+
 export function deleteThread(id) {
   return request({
     url: `/api/wish/threads/${id}`,
     method: 'delete'
+  })
+}
+
+export function createThread({
+  title,
+  content,
+  bgm,
+  background,
+  cid,
+  status,
+  auto_scroll
+}) {
+  return request({
+    url: '/api/wish/threads',
+    method: 'post',
+    data: {
+      title,
+      content,
+      bgm,
+      background,
+      cid,
+      status,
+      auto_scroll
+    },
+  });
+}
+
+export function updateThread(id, {
+  title,
+  content,
+  bgm,
+  background,
+  cid,
+  status,
+  auto_scroll
+}) {
+  return request({
+    url: `/api/wish/threads/${id}`,
+    method: 'put',
+    data: {
+      title,
+      content,
+      bgm,
+      background,
+      cid,
+      status,
+      auto_scroll
+    }
   })
 }
