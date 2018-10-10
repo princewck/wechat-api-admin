@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>微信用户列表</h2>
+    <h2>微信用户列表 <el-tag type="danger">3日内活跃用户比例：{{ activeRatio }}%</el-tag></h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
@@ -88,7 +88,12 @@ export default {
   computed: {
     ...mapState({
       list: state => state.customers.list,
-    })
+    }),
+    activeRatio() {
+      if (!this.list.length) return 0;
+      const activeList = this.list.filter(item => this.isRecent(item.last_login));
+      return Math.floor(activeList.length / this.list.length * 100);
+    }
   },
   created() {
     this.$store.dispatch("customer/fetch").catch(e => this.$message.error(e));
