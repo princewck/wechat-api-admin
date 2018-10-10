@@ -3,7 +3,7 @@
   <el-breadcrumb separator="/">
     <el-breadcrumb-item>首页</el-breadcrumb-item>
     <el-breadcrumb-item>送祝福小程序</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/wish/category' }">文章管理</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/wish/thread' }">文章管理</el-breadcrumb-item>
     <el-breadcrumb-item>编辑</el-breadcrumb-item>
   </el-breadcrumb>
   <div class="content">
@@ -94,7 +94,7 @@ export default {
   created() {
     const { id } = this.$route.params;
     this.$store.dispatch('wish/fetchCategories');
-    if (id) {
+    if (id && id !== 'new') {
       findThread(id).then(res => {
         this.form = res;
       })

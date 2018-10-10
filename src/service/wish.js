@@ -59,7 +59,8 @@ export function createThread({
   background,
   cid,
   status,
-  auto_scroll
+  auto_scroll,
+  description
 }) {
   return request({
     url: '/api/wish/threads',
@@ -71,7 +72,8 @@ export function createThread({
       background,
       cid,
       status,
-      auto_scroll
+      auto_scroll,
+      description,
     },
   });
 }
@@ -83,7 +85,8 @@ export function updateThread(id, {
   background,
   cid,
   status,
-  auto_scroll
+  auto_scroll,
+  description,
 }) {
   return request({
     url: `/api/wish/threads/${id}`,
@@ -95,7 +98,8 @@ export function updateThread(id, {
       background,
       cid,
       status,
-      auto_scroll
+      auto_scroll,
+      description,
     }
   })
 }

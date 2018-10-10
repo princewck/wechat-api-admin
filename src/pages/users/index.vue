@@ -65,7 +65,7 @@
           prop="avatar"
           label="备注">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.today"  type="success">今天登录过</el-tag>
+            <el-tag v-if="isRecent(scope.row.last_login)"  type="success">3天内登录过</el-tag>
           </template>
         </el-table-column>                
       </el-table>     
@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.customers.list.map(item => ({...item, today: isToday(item.last_login)}))
+      list: state => state.customers.list,
     })
   },
   created() {
@@ -96,6 +96,9 @@ export default {
   methods: {
     format(t) {
       return moment(t).format('YYYY-MM-DD HH:mm:ss');
+    },
+    isRecent(time) {
+      return moment().startOf('day') - moment(time).startOf('day') <= 86400000 * 3;
     }
   }
 };

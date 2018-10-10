@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>送祝福.分类管理</h2>
+    <h2>送祝福.分类管理<el-button @click="add" type="success" class="pull-right">添加</el-button></h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item>首页</el-breadcrumb-item>
       <el-breadcrumb-item>送祝福小程序</el-breadcrumb-item>
@@ -83,7 +83,7 @@ export default {
       }
     },
     add() {
-      this.$router.push({path: '/wish/category/new/edit'});
+      this.$router.push({path: '/wish/thread/new/edit'});
     },
     format(m) {
       return moment(m).format('YYYY-MM-DD HH:mm:ss');
