@@ -13,7 +13,11 @@
       >
       <el-table-column width="50px" prop="id" label="ID"/>
       <el-table-column prop="title" label="标题"/>
-      <el-table-column prop="background" label="背景图片"/>
+      <el-table-column prop="background" label="背景图片">
+        <template slot-scope="scope">
+          <img v-if="scope.row.background" :src="scope.row.background" style="width: 100px" />
+        </template>
+      </el-table-column>
       <el-table-column prop="cid" label="所属分类">
         <template slot-scope="scope">
           <el-tag>{{ getCate(scope.row) }}</el-tag>

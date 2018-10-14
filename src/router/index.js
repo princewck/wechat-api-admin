@@ -12,6 +12,8 @@ import WishCategory from '@/pages/wish/WishCategory';
 import WishThread from '@/pages/wish/WishThread';
 import ThreadEdit from '@/pages/wish/edit';
 
+import AssetsList from '@/pages/assets';
+
 
 Vue.use(Router)
 
@@ -56,7 +58,11 @@ export default new Router({
         {
           path: '/wish/thread/:id/edit',
           component: ThreadEdit,
-        }
+        },
+        {
+          path: '/assets',
+          component: AssetsList,
+        },
       ]
     }
   ]

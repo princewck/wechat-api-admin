@@ -29,6 +29,13 @@
         <el-menu-item index="/wish/categroy">分组管理</el-menu-item>        
         <el-menu-item index="/wish/thread">文章管理</el-menu-item>
       </el-submenu>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>文件管理</span>
+        </template>
+        <el-menu-item index="/assets">文件列表</el-menu-item>        
+      </el-submenu>      
     </el-menu>
   </div>
 </template>
