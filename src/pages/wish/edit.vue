@@ -39,6 +39,42 @@
         :model="form"
         label-width="150px"
       >
+        <el-form-item label-width="100%" label="封面图片：">
+          <FileSelect type="image" @onSubmit="onSelectCover">
+            <el-button type="success" plain>选择</el-button>
+          </FileSelect>
+          <div class="bg-preview" v-if="form.cover">
+            <img :src="form.cover"/>
+            <div>
+              <i @click="removeCover" class="el-icon-delete"></i>
+            </div>
+          </div>
+          <!-- <el-input type="textarea" v-model="form.background"></el-input> -->
+        </el-form-item>   
+        <el-form-item label-width="100%" label="背景图片：">
+          <FileSelect type="image" @onSubmit="onSelectBg">
+            <el-button type="success" plain>选择</el-button>
+          </FileSelect>
+          <div class="bg-preview" v-if="form.background">
+            <img :src="form.background"/>
+            <div>
+              <i @click="removeBackground" class="el-icon-delete"></i>
+            </div>
+          </div>
+          <!-- <el-input type="textarea" v-model="form.background"></el-input> -->
+        </el-form-item> 
+        <el-form-item label-width="100%" label="背景音乐：">
+          <FileSelect type="audio" @onSubmit="onSelectBgm">
+            <el-button type="success" plain>选择</el-button>
+          </FileSelect>          
+          <el-button type="danger" plain @click="deleteBgm">删除</el-button>
+          <div v-if="form.bgm" class="bgm-preview">
+            <audio :src="form.bgm" controls="controls">
+              您的浏览器不支持默认音频控件
+            </audio>
+          </div>
+          <!-- <el-input type="textarea" v-model="form.bgm"></el-input> -->
+        </el-form-item>               
         <el-form-item label-width="100%" label="所属分类：">
           <el-select v-model="form.cid" placeholder="选择所属分类">
             <el-option 
@@ -60,13 +96,7 @@
             <el-option label="滚动" :value="1" />
             <el-option label="不滚动" :value="0" />
           </el-select>
-        </el-form-item>                
-        <el-form-item label-width="100%" label="背景图片：">
-        <el-input type="textarea" v-model="form.background"></el-input>
-        </el-form-item> 
-        <el-form-item label-width="100%" label="背景音乐：">
-          <el-input type="textarea" v-model="form.bgm"></el-input>
-        </el-form-item>                 
+        </el-form-item>                              
       </el-form>      
     </div>
   </div>
@@ -77,6 +107,7 @@
 import Editor from '@/components/Editor';
 import { mapState } from 'vuex';
 import { findThread } from '@/service/wish';
+import FileSelect from '@/components/FileSelect';
 export default {
   data() {
     return {
@@ -90,6 +121,7 @@ export default {
   },
   components: {
     editor: Editor,
+    FileSelect,
   },
   created() {
     const { id } = this.$route.params;
@@ -113,6 +145,24 @@ export default {
       } catch (e) {
         this.$message.error(e.message);
       }
+    },
+    removeBackground() {
+      this.form.background = null;
+    },
+    onSelectBg(url) {
+      this.$set(this.form, 'background', url);
+    },
+    onSelectBgm(url) {
+      this.$set(this.form, 'bgm', url);
+    },
+    onSelectCover(url) {
+      this.$set(this.form, 'cover', url);
+    },
+    removeCover() {
+      this.form.cover = null;
+    },
+    deleteBgm() {
+      this.form.bgm = null;
     }
   }
 }
@@ -156,6 +206,41 @@ export default {
       width: 320px;
       border-left: 1px solid #c5c5c5;
       padding: 15px;
+      overflow: auto;
+
+      .bg-preview {
+        width: 100%;
+        position: relative;
+        margin-top: 10px;
+        &:hover {
+          > div {
+            color: #fff;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > i {
+              cursor: pointer;
+            }
+          }
+        }
+        img {
+          width: 100%;
+        }
+        > div {
+          display: none;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          background: rgba(0, 0, 0, .5);
+        }
+      }
+
+      .bgm-preview {
+        margin-top: 10px;
+      }
     }
   }
 }
