@@ -30,6 +30,14 @@
           label="类型">
         </el-table-column>    
         <el-table-column
+          prop="type"
+          label="预览">
+          <template slot-scope="scope">
+            <img :src="scope.row.value" height="50px" v-if="scope.row.type == 'image'" />
+            <audio :src="scope.row.value" loop controls v-if="scope.row.type == 'audio'" />
+          </template>
+        </el-table-column>    
+        <el-table-column
           prop="description"
           label="描述">
         </el-table-column>   

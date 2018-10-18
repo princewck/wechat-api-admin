@@ -24,11 +24,11 @@
         <el-form-item label="描述">
           <el-input type="textarea" v-model="form.description"></el-input>
         </el-form-item>
-        <el-form-item label-width="100%" label="正文">
-          <div class="main-content">
-            <editor v-model="form.content" eid="wish_content"/>
-          </div>
+        <el-form-item class="form-item-content" label-width="100%" label="正文">
         </el-form-item>
+        <div class="main-content">
+          <editor v-model="form.content" eid="wish_content"/>
+        </div>        
       </el-form> 
     </div>
     <div class="aside">
@@ -195,11 +195,23 @@ export default {
       box-sizing: border-box;
       overflow: auto;
       @include Flex(column nowrap, flex-start, flex-start);
-
-      .main-content {
-        width: 100%;
-        height: 300px;
+      > form {
+        flex: auto;
+        @include Flex(column nowrap, flex-start, stretch);
       }
+      .main-content {
+        flex: auto;
+        width: 100%;
+        @include Flex(column nowrap, flex-start, stretch);
+        > div {
+          flex: auto;
+          @include Flex(column nowrap, flex-start, stretch);
+        }
+      }
+    }
+
+    #wish_content {
+      @include Flex(column nowrap, flex-start, stretch);
     }
     .aside {
       flex: 0 0 320px;

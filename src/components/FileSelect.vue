@@ -45,7 +45,7 @@
               :data="list"
               highlight-current-row
               @current-change="handleCurrentChange"
-              style="width: 100%">
+              style="width: 100%;max-height: 500px;overflow: auto;">
               <el-table-column
                 type="index"
                 width="50">
@@ -64,6 +64,7 @@
                 property="preview"
                 label="预览">
                 <template slot-scope="scope">
+                  <audio :src="scope.row.value" loop controls v-if="scope.row.type == 'audio'" />                  
                   <el-popover
                     width="400"
                     trigger="hover"
