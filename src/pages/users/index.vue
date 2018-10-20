@@ -1,14 +1,22 @@
 <template>
   <div>
-    <h2>微信用户列表 <el-tag type="danger">3日内活跃用户比例：{{ activeRatio }}%</el-tag></h2>
+    <h2>微信用户列表 
+      <el-tag type="success" class="m-l">总计： {{ total }}人</el-tag>
+      <el-tag type="danger" class="m-l">3日活跃比例：{{ activeRatio }}%</el-tag>
+    </h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>活动列表</el-breadcrumb-item>
       <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-    </el-breadcrumb>    
+    </el-breadcrumb>  
+    <div class="ope-panel">
+      <el-button type="primary" @click="filter=''">全部</el-button>
+      <el-button type="success" @click="filter='today'">只看今日</el-button>
+      <el-button type="warning" @click="filter='3days'">最近三天</el-button>
+    </div>  
     <el-table
-        :data="list"
+        :data="shown"
         stripe
         style="width: 100%"
       >      
@@ -83,16 +91,42 @@ function isToday(d) {
 export default {
   name: "Users",
   data() {
-    return {};
+    return {
+      filter: '',
+    };
   },
   computed: {
     ...mapState({
       list: state => state.customers.list,
     }),
+    shown() {
+      return this.list.filter(item => {
+        if (!this.filter) return item;
+        const m = moment(item.last_login);
+        if (this.filter === 'today') {
+          return m.isAfter(
+            moment()
+            .startOf('day')
+            .subtract(1, 'seconds')
+          );
+        }
+        if (this.filter === '3days') {
+          return m.isAfter(
+            moment()
+            .startOf('day')
+            .subtract(3, 'days')
+            .subtract(1, 'seconds')
+          );
+        }
+      });
+    },
     activeRatio() {
       if (!this.list.length) return 0;
       const activeList = this.list.filter(item => this.isRecent(item.last_login));
       return Math.floor(activeList.length / this.list.length * 100);
+    },
+    total() {
+      return this.shown.length;
     }
   },
   created() {
@@ -114,5 +148,17 @@ h2 {
   text-align: left; 
   border-bottom: 1px solid #ddd;
   margin-bottom: 30px;
+  line-height: 45px;
+  display: flex;
+  align-items: center;
+  .m-l {
+    margin-left: 15px;
+  }
+}
+
+.ope-panel {
+  height: 45px;
+  line-height: 45px;
+  margin-top: 15px;
 }
 </style>
