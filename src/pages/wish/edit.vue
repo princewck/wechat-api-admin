@@ -1,11 +1,13 @@
 <template>
 <div class="wrapper">
-  <el-breadcrumb separator="/">
-    <el-breadcrumb-item>首页</el-breadcrumb-item>
-    <el-breadcrumb-item>送祝福小程序</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/wish/thread' }">文章管理</el-breadcrumb-item>
-    <el-breadcrumb-item>编辑</el-breadcrumb-item>
-  </el-breadcrumb>
+  <div class="breadcrumb">
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item>送祝福小程序</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/wish/thread' }">文章管理</el-breadcrumb-item>
+      <el-breadcrumb-item>编辑</el-breadcrumb-item>
+    </el-breadcrumb>    
+  </div>
   <div class="content">
     <div class="op-panel">
       <el-button @click="onSubmit" type="primary">发布</el-button>
@@ -27,7 +29,11 @@
         <el-form-item class="form-item-content" label-width="100%" label="正文">
         </el-form-item>
         <div class="main-content">
-          <editor v-model="form.content" eid="wish_content"/>
+          <editor 
+            :value="form.content" 
+            eid="wish_content"
+            @onContentChange="onContentChange" 
+          />
         </div>        
       </el-form> 
     </div>
@@ -104,7 +110,7 @@
 </template>
 
 <script>
-import Editor from '@/components/Editor';
+import Editor from '@/components/Editor/index';
 import { mapState } from 'vuex';
 import { findThread } from '@/service/wish';
 import FileSelect from '@/components/FileSelect';
@@ -146,6 +152,9 @@ export default {
         this.$message.error(e.message);
       }
     },
+    onContentChange(content) {
+      this.form.content = content;
+    },
     removeBackground() {
       this.form.background = null;
     },
@@ -170,6 +179,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/mixins.scss';
+
+.breadcrumb {
+  background: #fff;
+  padding-bottom: 15px;
+}
 .wrapper {
   width: 100%;
   @include Flex(column nowrap, flex-start, stretch);
@@ -198,15 +212,6 @@ export default {
       > form {
         flex: auto;
         @include Flex(column nowrap, flex-start, stretch);
-      }
-      .main-content {
-        flex: auto;
-        width: 100%;
-        @include Flex(column nowrap, flex-start, stretch);
-        > div {
-          flex: auto;
-          @include Flex(column nowrap, flex-start, stretch);
-        }
       }
     }
 
