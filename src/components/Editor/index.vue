@@ -38,7 +38,8 @@ export default {
         if (value) {
           editor.setContent(value);
         }
-        editor.on('keyup', (e) => {
+        editor.on('change', (e) => {
+          console.log('内容变化了');
           this.$emit('onContentChange', editor.getContent());
         });
         editor.on('upload_image', () => {
@@ -51,7 +52,7 @@ export default {
     onSelectFile(file) {
       const { editor } = this;
       editor.insertContent(editor.dom.createHTML('img', { src: file }));
-      this.$emit('onContentChange', editor.getContent());
+      editor.fire('change');
     },
   },
   watch: {

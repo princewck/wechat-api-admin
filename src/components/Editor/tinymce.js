@@ -61,8 +61,8 @@ const contentStyle = `
 `;
 
 export default {
-  plugins: 'code searchreplace autoresize link table wlog_autofloat wlog_image textcolor colorpicker autosave',
-  toolbar: 'code | undo redo restoredraft| searchreplace link table wlog_image | forecolor backcolor',
+  plugins: 'code searchreplace autoresize link table wlog_autofloat wlog_image textcolor colorpicker autosave rdmcolor',
+  toolbar: 'code | undo redo restoredraft| searchreplace link table wlog_image | forecolor backcolor rdmcolor',
   content_style: contentStyle,
   statusbar: false,
   resize: false,
@@ -74,6 +74,7 @@ export default {
   skin: 'lightgray',
   skin_url: '/static/skins/lightgray',
   autoresize_min_height: 400,
+  // autoresize_max_height: 500,
   autofloat_top_offset: 70,
   convert_urls: false,
   setup: () => {

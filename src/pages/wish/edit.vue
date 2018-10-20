@@ -191,7 +191,7 @@ export default {
   > .content {
     flex: auto;
     @include Flex(row nowrap, flex-start, stretch);
-    padding-bottom: 50px;
+    padding-bottom: 60px;
     .op-panel {
       position: absolute;
       height: 60px;

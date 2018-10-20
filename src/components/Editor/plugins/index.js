@@ -10,3 +10,4 @@ import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/autosave';
 import './autofloat';
 import './images';
+import './rdmcolor';
