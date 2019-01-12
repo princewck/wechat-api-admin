@@ -15,6 +15,16 @@
       <el-button type="success" @click="filter='today'">只看今日</el-button>
       <el-button type="warning" @click="filter='3days'">最近三天</el-button>
     </div>  
+    <div>
+      <el-select :value="filters.appName" @change="changeApp" placeholder="请选择">
+        <el-option
+          v-for="item in appNames"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>      
+    </div>
     <el-table
         :data="shown"
         stripe
@@ -77,6 +87,13 @@
           </template>
         </el-table-column>                
       </el-table>     
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page.sync="pagination.current"
+        :page-size="20"
+        layout="total, prev, pager, next"
+        :total="pagination.count">
+      </el-pagination>      
   </div>
 </template>
 
@@ -93,11 +110,27 @@ export default {
   data() {
     return {
       filter: '',
+      appNames: [
+        {
+          label: '工时助手[新版]',
+          value: 'workshop_new',          
+        },
+        {
+          label: '工时助手',
+          value: 'workshop',          
+        },
+        {
+          label: '送福语',
+          value: 'wish',          
+        },
+      ]
     };
   },
   computed: {
     ...mapState({
       list: state => state.customers.list,
+      pagination: state => state.customers.pagination,
+      filters: state => state.customers.filters,
     }),
     shown() {
       return this.list.filter(item => {
@@ -130,7 +163,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("customer/fetch").catch(e => this.$message.error(e));
+    this.$store.dispatch("customer/fetch", { page: 1, appName: 'workshop_new'}).catch(e => this.$message.error(e));
   },
   methods: {
     format(t) {
@@ -138,6 +171,13 @@ export default {
     },
     isRecent(time) {
       return moment().startOf('day') - moment(time).startOf('day') <= 86400000 * 3;
+    },
+    async changeApp(app) {
+      await this.$store.dispatch('customer/changeApp', app);
+      await this.$store.dispatch('customer/fetch', {});
+    },
+    async handleCurrentChange(current) {
+      await this.$store.dispatch('customer/fetch', {page: current});
     }
   }
 };
