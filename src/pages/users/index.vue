@@ -1,9 +1,6 @@
 <template>
   <div>
-    <h2>微信用户列表 
-      <el-tag type="success" class="m-l">总计： {{ total }}人</el-tag>
-      <el-tag type="danger" class="m-l">3日活跃比例：{{ activeRatio }}%</el-tag>
-    </h2>
+    <h2>微信用户列表 </h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
@@ -11,22 +8,19 @@
       <el-breadcrumb-item>活动详情</el-breadcrumb-item>
     </el-breadcrumb>  
     <div class="ope-panel">
-      <el-button type="primary" @click="filter=''">全部</el-button>
-      <el-button type="success" @click="filter='today'">只看今日</el-button>
-      <el-button type="warning" @click="filter='3days'">最近三天</el-button>
-    </div>  
-    <div>
-      <el-select :value="filters.appName" @change="changeApp" placeholder="请选择">
+      小程序：<el-select style="width: 250px;" :value="filters.appName" @change="changeApp" placeholder="请选择">
         <el-option
           v-for="item in appNames"
           :key="item.value"
           :label="item.label"
           :value="item.value">
         </el-option>
-      </el-select>      
+      </el-select> 
+    </div>  
+    <div>     
     </div>
     <el-table
-        :data="shown"
+        :data="list"
         stripe
         style="width: 100%"
       >      
@@ -132,34 +126,8 @@ export default {
       pagination: state => state.customers.pagination,
       filters: state => state.customers.filters,
     }),
-    shown() {
-      return this.list.filter(item => {
-        if (!this.filter) return item;
-        const m = moment(item.last_login);
-        if (this.filter === 'today') {
-          return m.isAfter(
-            moment()
-            .startOf('day')
-            .subtract(1, 'seconds')
-          );
-        }
-        if (this.filter === '3days') {
-          return m.isAfter(
-            moment()
-            .startOf('day')
-            .subtract(3, 'days')
-            .subtract(1, 'seconds')
-          );
-        }
-      });
-    },
-    activeRatio() {
-      if (!this.list.length) return 0;
-      const activeList = this.list.filter(item => this.isRecent(item.last_login));
-      return Math.floor(activeList.length / this.list.length * 100);
-    },
     total() {
-      return this.shown.length;
+      return this.pagination.count;
     }
   },
   created() {
