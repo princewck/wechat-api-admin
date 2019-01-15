@@ -79,7 +79,12 @@
           <template slot-scope="scope">
             <el-tag v-if="isRecent(scope.row.last_login)"  type="success">3天内登录过</el-tag>
           </template>
-        </el-table-column>                
+        </el-table-column>     
+        <el-table-column label="操作" v-if="filters.appName === 'workshop_new'" >
+          <template slot-scope="scope">
+            <el-button type="primary">记工信息</el-button>
+          </template>
+        </el-table-column>
       </el-table>     
       <el-pagination
         @current-change="handleCurrentChange"
