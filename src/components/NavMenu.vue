@@ -36,6 +36,14 @@
         </template>
         <el-menu-item index="/assets">文件列表</el-menu-item>        
       </el-submenu>      
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>积分商品管理</span>
+        </template>
+        <el-menu-item index="/work_product/categroy">分类列表</el-menu-item>        
+        <el-menu-item index="/work_product/product">商品列表</el-menu-item>        
+      </el-submenu>      
     </el-menu>
   </div>
 </template>
