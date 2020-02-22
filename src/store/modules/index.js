@@ -3,6 +3,7 @@ import customers from './customers';
 import wish from './wish';
 import assets from './assets';
 import workProduct from './work-product';
+import alimama from './alimama';
 
 export default {
   user,
@@ -10,4 +11,5 @@ export default {
   wish,
   assets,
   workProduct,
+  alimama,
 }

@@ -18,6 +18,8 @@ import WorkProductCategory from '@/pages/work_product/category';
 import WorkProduct from '@/pages/work_product/product';
 import WorkProductEdit from '@/pages/work_product/edit';
 
+import XPKList from '@/pages/alimama/xpkList';
+
 
 Vue.use(Router)
 
@@ -78,7 +80,11 @@ export default new Router({
         {
           path: '/work_product/product/:id/edit',
           component: WorkProductEdit,
-        },        
+        },  
+        {
+          path: '/alimama/xpk',
+          component: XPKList,
+        }      
       ]
     }
   ]
