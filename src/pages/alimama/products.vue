@@ -17,7 +17,7 @@
         stripe
         style="width: 100%"
       >
-      <el-table-column label="详情">
+      <el-table-column label="详情" width="700">
         <template slot-scope="scope">
           <p-detail :data="scope.row"></p-detail>
         </template>
@@ -36,7 +36,7 @@
       <el-table-column label="活动期限">
         <template slot-scope="scope">
           <div class="activity" v-if="scope.row.status > 0">
-            {{ scope.row.event_start_time }} - {{ scope.row.event_end_time }}
+            {{ format(scope.row.event_start_time) }} - {{ format(scope.row.event_end_time) }}
           </div>
         </template>
       </el-table-column>      
@@ -59,6 +59,7 @@
 <script>
 import { mapState } from 'vuex';
 import PDetail from './detail';
+import moment from 'moment';
 export default {
   name: 'xpkList',
   components: {
@@ -77,6 +78,9 @@ export default {
   methods: {
     view(row) {
       console.log('row', row);
+    },
+    format(t) {
+      return moment(t).format('YYYY-MM-DD HH:mm');
     },
     handleCurrentChange(page) {
       const { category } = this.$route.params;

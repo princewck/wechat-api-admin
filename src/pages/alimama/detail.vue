@@ -11,16 +11,22 @@
       </p>
       <p>
         <label v-if="data.coupon_click_url">红包：<a :href="data.coupon_click_url">{{ data.coupon_info }}</a></label>
-        <label v-if="data.coupon_click_url">{{ data.coupon_start_time }} - {{ data.coupon_end_time }}</label>
+        <label v-if="data.coupon_click_url">{{ format(data.coupon_start_time) }} - {{ format(data.coupon_end_time) }}</label>
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: 'ProductDetail',
   props: ['data'],
+  methods: {
+    format(t) {
+      return moment(t).format('YYYY-MM-DD HH:mm');
+    },    
+  },
 }
 </script>
 
