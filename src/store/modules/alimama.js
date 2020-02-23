@@ -1,4 +1,4 @@
-import { getXPKList, getXPKDetail } from '@/service/alimama';
+import { getXPKList, getXPKDetail, getCategories, getProductsByCategory as getProducts } from '@/service/alimama';
 
 export default {
   state: {
@@ -12,7 +12,15 @@ export default {
       page: 1,
       total: 0,
       loading: false,
-    }
+    },
+    // 自己数据库中的商品，同步过来的
+    categories: [],
+    products: {
+      list: [],
+      page: 1,
+      total: 0,
+      loading: false,
+    },    
   },
   mutations: {
     'alimama/merge'(state, payload) {
@@ -47,6 +55,31 @@ export default {
           list: result.results.uatm_tbk_item,
           page,
           total: result.total_results,     
+          loading: false,     
+        }
+      });
+    },
+    async 'alimama/getCategories' ({commit, state}, payload) {
+      const result = await getCategories();
+      commit('alimama/merge', {
+        categories: result,
+      });
+    },
+    async 'alimama/getProducts' ({commit, state}, { page = 1, category }) {
+      commit('alimama/merge', {
+        products: {
+          list: [],
+          loading: true,
+          page,
+          total: 0,          
+        }
+      });      
+      const result = await getProducts(category, page);
+      commit('alimama/merge', {
+        products: {
+          list: result.products,
+          page,
+          total: result.total_count,     
           loading: false,     
         }
       });

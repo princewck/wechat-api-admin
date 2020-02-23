@@ -49,7 +49,8 @@
           <i class="el-icon-location"></i>
           <span>阿里妈妈</span>
         </template>
-        <el-menu-item index="/alimama/xpk">选品库列表</el-menu-item>
+        <el-menu-item index="/tbk/categories">商品列表</el-menu-item>
+        <el-menu-item index="/alimama/xpk">选品列表</el-menu-item>
       </el-submenu>      
     </el-menu>
   </div>

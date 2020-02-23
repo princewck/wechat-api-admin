@@ -20,6 +20,8 @@ import WorkProductEdit from '@/pages/work_product/edit';
 
 import XPKList from '@/pages/alimama/xpkList';
 import XPKDetail from '@/pages/alimama/xpkDetail';
+import Categories from '@/pages/alimama/categories';
+import Products from '@/pages/alimama/products';
 
 
 Vue.use(Router)
@@ -87,9 +89,17 @@ export default new Router({
           component: XPKList,
         },
         {
-          path: 'alimama/xpk/:id',
+          path: '/alimama/xpk/:id',
           component: XPKDetail,
-        }     
+        },
+        {
+          path: '/tbk/categories',
+          component: Categories,
+        },
+        {
+          path: '/tbk/products/:category',
+          component: Products,
+        }
       ]
     }
   ]

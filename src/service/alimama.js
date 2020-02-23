@@ -17,3 +17,20 @@ export function getXPKDetail(page, favoritesId) {
     }
   });
 }
+export function getCategories() {
+  return request({
+    method: 'get',
+    url: '/api/tbk/categories',
+  });
+}
+
+export function getProductsByCategory(category, page = 1) {
+  return request({
+    method: 'get',
+    url: '/api/tbk/products',
+    params: {
+      category,
+      page
+    }
+  });
+}
