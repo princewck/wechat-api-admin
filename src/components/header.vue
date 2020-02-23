@@ -23,7 +23,7 @@ export default {
 @import '@/styles/mixins.scss';
   .header {
     width: 100%;
-    height: 100px;
+    flex: 0 0 100px;
     background: #545c64;
     @include Flex(row nowrap, flex-end, flex-start);
     @include links();

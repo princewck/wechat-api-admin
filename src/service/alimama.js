@@ -7,7 +7,7 @@ export function getXPKList() {
   });
 }
 
-export function getXPKDetail() {
+export function getXPKDetail(page, favoritesId) {
   return request({
     method: 'get',
     url: '/api/xpk/detail',

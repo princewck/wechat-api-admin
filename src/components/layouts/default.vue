@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <authorized>
+  <authorized class="auth">
     <Header :info="info"/>
     <div class="content-wrapper">
       <nav-menu class="side-bar"/>
@@ -31,17 +31,19 @@ export default {
 @import '@/styles/mixins.scss';
   .wrapper {
     height: 100vh;
+    box-sizing: border-box;
     @include Flex(column nowrap, center, stretch);
-    > div {
-      flex: auto;
+    > div.auth {
+      box-sizing: border-box;
+      height: 100%;
       align-items: stretch;
       @include Flex(column nowrap, center, stretch);
     }
   }
   .content-wrapper {
-    height: 100%;
     flex: auto;
     @include Flex(row nowrap, flex-start, stretch);
+    overflow: hidden;
     >.side-bar {
       background: #ddd;
       padding-top: 1px;
@@ -53,7 +55,6 @@ export default {
       @include Flex(column nowrap, flex-start, stretch);
       > div {
         background: #fff;
-        height: 100%;
         overflow: auto;
         padding: 15px 25px;
         box-sizing: border-box;

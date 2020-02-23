@@ -30,7 +30,7 @@ export default {
     return {};
   },
   computed: mapState({
-    list: state => state.alimama.xpkList,
+    list: state => state.alimama.xpkList.list,
   }),
   mounted() {
     this.$store.dispatch('alimama/getXPKList');
@@ -38,6 +38,7 @@ export default {
   methods: {
     view(row) {
       console.log('row', row);
+      this.$router.push(`/alimama/xpk/${row.favorites_id}`);
     }
   }
 }
