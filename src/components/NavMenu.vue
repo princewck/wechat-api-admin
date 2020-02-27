@@ -52,6 +52,14 @@
         <el-menu-item index="/tbk/categories">商品列表</el-menu-item>
         <el-menu-item index="/alimama/xpk">选品列表</el-menu-item>
       </el-submenu>      
+      <el-submenu index="5">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>自媒体</span>
+        </template>
+        <el-menu-item index="/selfmedia/list">文章列表</el-menu-item>
+        <el-menu-item index="/alimama/xpk">任务列表</el-menu-item>
+      </el-submenu>      
     </el-menu>
   </div>
 </template>

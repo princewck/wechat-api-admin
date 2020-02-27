@@ -23,6 +23,10 @@ import XPKDetail from '@/pages/alimama/xpkDetail';
 import Categories from '@/pages/alimama/categories';
 import Products from '@/pages/alimama/products';
 
+import SelfMediaList from '@/pages/selfmedia/index';
+import SelfMediaDetail from '@/pages/selfmedia/detail';
+import SelfMediaEdit from '@/pages/selfmedia/edit';
+
 
 Vue.use(Router)
 
@@ -99,7 +103,19 @@ export default new Router({
         {
           path: '/tbk/products/:category',
           component: Products,
-        }
+        },
+        {
+          path: '/selfmedia/list',
+          component: SelfMediaList,
+        },
+        {
+          path: '/selfmedia/:id/view',
+          component: SelfMediaDetail,
+        },
+        {
+          path: '/selfmedia/:id/edit',
+          component: SelfMediaEdit,
+        },
       ]
     }
   ]

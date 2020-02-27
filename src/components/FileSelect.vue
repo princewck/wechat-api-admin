@@ -17,7 +17,7 @@
                   ref="upload"
                   :http-request="onUpload"
                   :on-remove="handleRemove"
-                  :list-type="form.type === 'image' ? 'picture' : ''"
+                  :list-type="accept || (form.type === 'image' ? 'picture' : '')"
                   action=""
                   :limit="1"
                   :accept="type==='image' ? 'image/*' : undefined"
@@ -112,7 +112,7 @@ function emptyForm() {
 }
 export default {
   name: 'fileSelect',
-  props: ['type'],
+  props: ['type', 'accept'],
   data() {
     return {
       selectVisible: false,
@@ -187,7 +187,7 @@ export default {
         } else {
           value = this.currentRow.value;
         }
-        this.$emit('onSubmit', value);
+        this.$emit('onSubmit', value, this.name);
         this.selectVisible = false;        
       } catch (e) {
         console.error(e);

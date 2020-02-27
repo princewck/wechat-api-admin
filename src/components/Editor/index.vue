@@ -4,8 +4,13 @@
   <FileSelect 
     type="image"
     @onSubmit="onSelectFile"
-    ref="selector"
-  ></FileSelect>   
+    ref="imageSelector"
+  ></FileSelect> 
+  <FileSelect 
+    accept="video/*"
+    @onSubmit="onSelectVideo"
+    ref="videoSelector"
+  ></FileSelect>     
 </div>
 </template>
 
@@ -43,7 +48,10 @@ export default {
           this.$emit('onContentChange', editor.getContent());
         });
         editor.on('upload_image', () => {
-          this.$refs.selector.select();
+          this.$refs.imageSelector.select();
+        });
+        editor.on('upload_video', () => {
+          this.$refs.videoSelector.select();
         });
       },
     });
@@ -54,6 +62,11 @@ export default {
       editor.insertContent(editor.dom.createHTML('img', { src: file }));
       editor.fire('change');
     },
+    onSelectVideo(file) {
+      const { editor } = this;
+      editor.insertContent(`<span class="video-url" data-url="${file}">[视频]</span>`);
+      editor.fire('change');
+    }
   },
   watch: {
     value(val, oldVal) {

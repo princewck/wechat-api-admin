@@ -11,3 +11,4 @@ import 'tinymce/plugins/autosave';
 import './autofloat';
 import './images';
 import './rdmcolor';
+import './video';

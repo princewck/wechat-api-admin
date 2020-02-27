@@ -61,8 +61,8 @@ const contentStyle = `
 `;
 
 export default {
-  plugins: 'code searchreplace autoresize link table wlog_autofloat wlog_image textcolor colorpicker autosave rdmcolor',
-  toolbar: 'code | undo redo restoredraft| searchreplace link table wlog_image | forecolor backcolor rdmcolor',
+  plugins: 'code searchreplace autoresize link table wlog_autofloat wlog_image wlog_video textcolor colorpicker autosave rdmcolor',
+  toolbar: 'code | undo redo restoredraft| searchreplace link table wlog_image wlog_video | forecolor backcolor rdmcolor',
   content_style: contentStyle,
   statusbar: false,
   resize: false,

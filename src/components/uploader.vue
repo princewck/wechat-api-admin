@@ -8,6 +8,7 @@
         <el-upload
           class="upload-demo"
           ref="upload"
+          accept="video/*,image/*"
           :http-request="onUpload"
           :on-remove="handleRemove"
           :file-list="fileList"
