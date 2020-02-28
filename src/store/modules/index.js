@@ -4,6 +4,7 @@ import wish from './wish';
 import assets from './assets';
 import workProduct from './work-product';
 import alimama from './alimama';
+import selfmedia from './selfmedia';
 
 export default {
   user,
@@ -12,4 +13,5 @@ export default {
   assets,
   workProduct,
   alimama,
+  selfmedia,
 }

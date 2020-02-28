@@ -16,9 +16,17 @@ export function update(id, data) {
   });
 }
 
-export function fetchList() {
+export function fetchList(page = 1) {
   return request({
     method: 'GET',
     url: '/api/selfmedia',
+    params: { page },
+  });
+}
+
+export function getById(id) {
+  return request({
+    method: 'GET',
+    url: `/api/selfmedia/${id}`,
   });
 }
