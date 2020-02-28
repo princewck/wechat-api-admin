@@ -31,7 +31,7 @@
           </div>            
         </el-form-item>  
         <el-form-item>
-          <el-button type="success" @click="this.publish">发布</el-button>
+          <el-button type="success" @click="this.submit">发布</el-button>
         </el-form-item>
       </el-form>     
   </div>
@@ -41,6 +41,7 @@
 import Editor from '@/components/Editor/index';
 import FileSelect from '@/components/FileSelect';
 import { publish, update } from '@/service/selfmedia';
+import { mapState } from 'vuex';
 
 export default {
   name: 'selfMediaEdit',
@@ -48,6 +49,11 @@ export default {
     editor: Editor,
     FileSelect,
   },  
+  computed: {
+    ...mapState({
+      detail: state => state.selfmedia.detail,
+    })
+  },
   data() {
     return {
       form: {
@@ -57,8 +63,14 @@ export default {
       },
     };
   },
+  async mounted() {
+    if (this.$route.params.id) {
+      const detail = await this.$store.dispatch('media/get', {id: this.$route.params.id});
+      this.form = {...detail};
+    }
+  },
   methods: {
-    async publish() {
+    async submit() {
       if (!this.form.title) {
         this.$notify.error({
           title: '错误',

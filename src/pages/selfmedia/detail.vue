@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>自媒体.素材预览</h2>
+    <h2 style="margin-bottom: 15px">自媒体.素材预览</h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/selfmedia/list">文章列表</a></el-breadcrumb-item>
@@ -64,8 +64,9 @@ export default {
 
 <style lang="scss">
 article.post-article-content {
-  padding: 30px 25px 45px;
+  padding: 30px 45px 45px;
   min-height: 80vh;
+  text-align: center;
   img {
     max-width: 100%;
     margin: 15px 0;
@@ -73,21 +74,31 @@ article.post-article-content {
 
   video {
     max-width:100%;
+    margin: 30px 0;
   }
 
   h1 {
-    font-size: 25px;
+    font-size: 36px;
     margin-bottom: 45px;
     text-align: center;
   }
   p {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 32px;
+    margin-bottom: 45px;
+    text-align: left;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(24, 151, 255);
+    &:hover {
+      color: blue;
+    }
   }
 
   .article-info {
-    font-size: 12px;
+    font-size: 18px;
     color: #ddd;
     margin-bottom: 35px;
     text-align: center;

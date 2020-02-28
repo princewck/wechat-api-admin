@@ -34,6 +34,7 @@ export default {
       commit('media/merge', {
         detail,
       });
+      return detail;
     }
   }  
 }

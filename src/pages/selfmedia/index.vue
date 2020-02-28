@@ -38,6 +38,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button type="primary" @click="view(scope.row)">查看</el-button>
+          <el-button type="primary" @click="edit(scope.row)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>  
@@ -79,6 +80,9 @@ export default {
     },
     view(row) {
       this.$router.push(`/selfmedia/${row.id}/view`);
+    },
+    edit(row) {
+      this.$router.push(`/selfmedia/${row.id}/edit`);
     },
     getSummary(content) {
       const div = document.createElement('div');

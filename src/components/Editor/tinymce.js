@@ -73,6 +73,7 @@ export default {
   },
   skin: 'lightgray',
   skin_url: '/static/skins/lightgray',
+  valid_elements: 'p,a[href|target=_blank],h1,h2,img[src],div,span[data-url|class]',
   autoresize_min_height: 400,
   // autoresize_max_height: 500,
   autofloat_top_offset: 70,

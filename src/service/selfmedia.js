@@ -11,7 +11,7 @@ export function publish(data) {
 export function update(id, data) {
   return request({
     method: 'PUT',
-    url: `/api/selfmedia/:${id}`,
+    url: `/api/selfmedia/${id}`,
     data,
   });
 }
