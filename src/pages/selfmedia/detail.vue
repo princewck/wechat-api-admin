@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="selfmedia-wrapper">
     <h2 style="margin-bottom: 15px">自媒体.素材预览</h2>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -63,13 +63,28 @@ export default {
 </script>
 
 <style lang="scss">
+.selfmedia-wrapper {
+  background: #f5f5f5 !important;
+  padding: 50px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+}
 article.post-article-content {
+  margin-top: 50px;
+  background-color: #fff;
   padding: 30px 45px 45px;
   min-height: 80vh;
   text-align: center;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   img {
-    max-width: 100%;
+    width: 100%;
     margin: 15px 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
   }
 
   video {

@@ -35,7 +35,7 @@
           {{ scope.row.images.length ? scope.row.images.length + '张' : '无' }}
         </template>
       </el-table-column>      
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button type="primary" @click="view(scope.row)">查看</el-button>
           <el-button type="primary" @click="edit(scope.row)">修改</el-button>
