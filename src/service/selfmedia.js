@@ -30,3 +30,9 @@ export function getById(id) {
     url: `/api/selfmedia/${id}`,
   });
 }
+export function remove(id) {
+  return request({
+    method: 'DELETE',
+    url: `/api/selfmedia/${id}`,
+  });
+}

@@ -1,4 +1,4 @@
-import { fetchList, getById } from '@/service/selfmedia';
+import { fetchList, getById, remove } from '@/service/selfmedia';
 
 export default {
   name: 'selfmedia',
@@ -35,6 +35,11 @@ export default {
         detail,
       });
       return detail;
-    }
+    },
+    async 'media/remove' ({ commit, dispatch, state }, { id }) {
+      await remove(id);
+      await dispatch('media/fetch', { page: state.pagination.current_page });
+    },
+
   }  
 }

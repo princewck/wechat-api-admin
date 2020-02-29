@@ -18,7 +18,7 @@
         stripe
         style="width: 100%"
       >
-      <el-table-column label="详情">
+      <el-table-column label="详情" width="700">
         <template slot-scope="scope">
           <p-detail :data="scope.row"></p-detail>
         </template>

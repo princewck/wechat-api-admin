@@ -20,7 +20,15 @@
             <el-option label="微博" value="weibo" />
             <el-option label="文章" value="post" />
           </el-select>
-        </el-form-item>        
+        </el-form-item>
+        <el-form-item label-width="100%" label="时效：">
+          <el-select v-model="form.expires" placeholder="文章时效性">
+            <el-option label="长期" value="never" />
+            <el-option label="今天24点前" value="today" />
+            <el-option label="明天24点前" value="tomorrow" />
+            <el-option label="后天24点前" value="day_after_tomorrow" />
+          </el-select>
+        </el-form-item>                
         <el-form-item class="form-item-content" label-width="100%" label="正文">
           <div class="main-content">
             <editor 
@@ -42,6 +50,7 @@ import Editor from '@/components/Editor/index';
 import FileSelect from '@/components/FileSelect';
 import { publish, update } from '@/service/selfmedia';
 import { mapState } from 'vuex';
+import moment from 'moment';
 
 export default {
   name: 'selfMediaEdit',
@@ -57,6 +66,7 @@ export default {
   data() {
     return {
       form: {
+        expires: 'never',
         title: '',
         content: '',
         article_type: null,
@@ -86,6 +96,23 @@ export default {
         return;        
       }
       const id = this.$route.params.id;
+      let expiresAt;
+      switch(this.form.expires) {
+        case 'today':
+          expiresAt = moment().endOf('day');
+          break;
+        case 'tomorrow':
+          expiresAt = moment().add(1, 'days').endOf('day');
+          break;
+        case 'day_after_tomorrow':
+          expiresAt = moment().add(2, 'days').endOf('day');
+          break;
+        case 'never':          
+        default:
+          expiresAt = moment().add(3, 'months').endOf('day');
+          break;
+      }
+      this.form.expires_at = expiresAt.format('YYYY-MM-DD HH:mm:ss');
       try {
         if (id === 'new') {
           await publish(this.form);
