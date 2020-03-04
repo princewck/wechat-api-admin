@@ -26,11 +26,13 @@ import Products from '@/pages/alimama/products';
 import SelfMediaList from '@/pages/selfmedia/index';
 import SelfMediaDetail from '@/pages/selfmedia/detail';
 import SelfMediaEdit from '@/pages/selfmedia/edit';
+import SelfMediaAccounts from '@/pages/selfmedia/accounts';
 
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/user',
@@ -107,6 +109,10 @@ export default new Router({
         {
           path: '/selfmedia/list',
           component: SelfMediaList,
+        },
+        {
+          path: '/selfmedia/accounts',
+          component: SelfMediaAccounts,
         },
         {
           path: '/selfmedia/:id/view',

@@ -1,8 +1,22 @@
-import { fetchList, getById, remove } from '@/service/selfmedia';
+import { 
+  fetchList, 
+  getById, 
+  remove,
+  createAccount,
+  fetchAccounts,
+  getAccountById,
+  updateAccount,
+  removeAccount,
+} from '@/service/selfmedia';
+import { createAccounts } from '../../service/selfmedia';
 
 export default {
   name: 'selfmedia',
   state: {
+    accounts: {
+      list: [],
+      pagination: {},
+    },
     detail: {
       content: ''
     },
@@ -30,7 +44,6 @@ export default {
     },
     async 'media/get' ({ commit }, { id }) {
       const detail = await getById(id);
-      console.log('detail', detail);
       commit('media/merge', {
         detail,
       });
@@ -40,6 +53,36 @@ export default {
       await remove(id);
       await dispatch('media/fetch', { page: state.pagination.current_page });
     },
-
+    async 'media/fetchAccounts' ({ commit, state }, payload) {
+      const page = payload && payload.page || 1;
+      const data = await fetchAccounts(page);
+      commit('media/merge', {
+        accounts: {
+          ...state.accounts,
+          list: data.accounts,
+          pagination: data.pagination,
+        }
+      });
+    },
+    async 'media/createAccount' ({ dispatch, state }, { payload }) {
+      await createAccount(payload);
+      dispatch('media/fetchAccounts');
+    },
+    async 'media/updateAccount' ({ dispatch }, { id, update }) {
+      await updateAccount(id, update);
+      dispatch('media/fetchAccounts');
+    },
+    async 'media/getAccountDetail' ({ commit }, { id }) {
+      const detail = await getAccountById(id);
+      commit('media/merge', {
+        accounts: {
+          ...state.accounts,
+          detail,
+        }
+      });
+    },
+    async 'media/removeAccount' ({ dispatch }, { id }) {
+      await removeAccount(id);
+    }
   }  
 }

@@ -30,9 +30,47 @@ export function getById(id) {
     url: `/api/selfmedia/${id}`,
   });
 }
+
 export function remove(id) {
   return request({
     method: 'DELETE',
     url: `/api/selfmedia/${id}`,
+  });
+}
+
+export function createAccount(data) {
+  return request({
+    method: 'POST',
+    url: '/api/selfmedia_account',
+    data,
+  });
+}
+
+export function fetchAccounts(page) {
+  return request({
+    method: 'GET',
+    url: '/api/selfmedia_accounts',
+    params: { page },
+  });
+}
+
+export function getAccountById(id) {
+  return request({
+    url: `/api/selfmedia_account/${id}`,
+  });
+}
+
+export function updateAccount(id, data) {
+  return request({
+    method: 'PUT',
+    url: `/api/selfmedia_account/${id}`,
+    data,
+  });
+}
+
+export function removeAccount(id) {
+  return request({
+    method: 'DELETE',
+    url: `/api/selfmedia_account/${id}`,
   });
 }

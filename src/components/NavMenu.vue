@@ -58,6 +58,7 @@
           <span>自媒体</span>
         </template>
         <el-menu-item index="/selfmedia/list">文章列表</el-menu-item>
+        <el-menu-item index="/selfmedia/accounts">账号管理</el-menu-item>
         <el-menu-item index="/alimama/xpk">任务列表</el-menu-item>
       </el-submenu>      
     </el-menu>
