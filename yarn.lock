@@ -6043,9 +6043,9 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tinymce@4.7.9:
-  version "4.7.9"
-  resolved "http://registry.npm.taobao.org/tinymce/download/tinymce-4.7.9.tgz#2f14934cf42ab20e6d081fd282842c24aecf1866"
+tinymce@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.6.0.tgz#b5eda4888e1a607ddd545619cfaa137d59de14b4"
 
 tmp@^0.0.33:
   version "0.0.33"
